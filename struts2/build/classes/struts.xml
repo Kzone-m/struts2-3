@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+	<package name="action" extends="struts-default">
+		<!-- LoginAction ログイン用アクション -->
+		<action name="LoginAction" class="action.LoginAction" method="execute">
+			<result name="success" type="chain">SelectTweetAction</result>
+			<result name="error">top.jsp</result>
+		</action>
+		
+		<action name="LogoutAction" class="action.LogoutAction" method="execute">
+			<result name="success">top.jsp</result>
+			<result name="error">top.jsp</result>
+		</action>
+		
+		<action name="SelectTweetAction" class="action.SelectTweetAction" method="execute">
+			<result name="success">main.jsp</result>
+		</action>
+		
+		<action name="ChangeIconAction" class="action.ChangeIconAction" method="execute">
+			<result name="success" type="chain">GoMyPageAction</result>
+			<result name="error" type="chain">SelectTweetAction</result> 
+		</action>
+		
+		<action name="InsertTweetAction" class="action.InsertTweetAction" method="execute">
+			<result name="success" type="chain">SelectTweetAction</result>
+			<result name="error" type="chain">SelectTweetAction</result>
+		</action>
+		
+		<action name="GoMyPageAction" class="action.GoMyPageAction" method="execute">
+			<result name="success">my_page.jsp</result>
+		</action>
+	
+	</package>
+</struts>

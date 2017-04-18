@@ -1,0 +1,172 @@
+/* ----------------- CSS Reset -------------------*/
+html, body,
+ul, ol, li,
+h1, h2, h3, h4, h5, h6, p, div {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Hiragino Kaku Gothic ProN W3', sans-serif;
+  background-color: #f7f7f7
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+
+/* ----------------- common properties -------------------*/
+.submit-wrapper{
+  float: right;
+}
+
+.submit_btn{
+    position: relative;
+    width: 100px;
+    height: 50px;
+    background-color: #4CE551;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+
+
+/* ----------------- MODAL Style -------------------*/
+.modal {
+  margin-top: 150px;
+}
+
+.modal-content{
+  background-color: #4CE5C1;
+  width: 400px;
+  padding: 20px;
+  font-style: bold;
+}
+
+.modal-content h2{
+  text-align: center;
+  border-bottom: 3px solid #4CC1E5;
+  color:white;
+  font-weight: bold;
+}
+
+.form-wrapper{
+  width: 100%;
+}
+
+.form-content{
+  border-radius: 5px;
+  border: none;
+  display: block;
+  width: 80%;
+  height: 40px;
+  margin: 20px auto;
+}
+
+.form-content-submit{
+  border-radius: 5px;
+  background-color: #E54C4C;
+  color: white;
+  border: none;
+  display: block;
+  width: 60%;
+  height: 40px;
+  margin: 20px auto;
+}
+
+
+
+
+
+
+/* ----------------- Landing Style -------------------*/
+.main-wrapper {
+  width: 100%;
+  background:url(../img/_header/Memory-Moments.png);
+  background-size: cover;
+  text-align: center;
+  color: #4CC1E5;
+  padding: 220px 0 180px 0;
+}
+
+.main-wrapper h1 {
+  font-size: 60px;
+  font-weight: bold;
+  letter-spacing: 5px;
+  margin-bottom: 15px;
+}
+
+.main-wrapper p {
+  font-family: "Avenir Next";
+  margin-left: 180px;
+  font-size: 18px;
+  color: #4CE5C1;
+  font-weight: bold;
+}
+
+.main-msg {
+  margin: 0 auto;
+  width: 80%;
+  text-align: left;
+}
+
+.register {
+  margin: 20px;
+  padding: 12px 40px;
+  opacity: 1.0;
+}
+
+
+/* ----------------- Mutter Style -------------------*/
+.tweet-wrapper{
+	margin: 0px 10px;
+	width: 250px;
+	height: 400px;
+	border: solid 3px #4CE5C1;
+	border-radius: 10px;
+	float: left;
+}
+
+
+.image-wrapper{
+	padding: 1% 2% 2% 2%;
+	height: 47%;
+	clear: both;
+}
+
+.image-wrapper img{
+	height: 100%;
+	width: 100%;
+	border-radius: 5px;
+}
+
+.account-wrapper{
+	height: 10%;
+}
+
+.account-wrapper img{
+	display: block;
+	float: left;
+	width: 40px;
+	height: 40px;
+	border-radius: 20px;
+}
+
+.account-wrapper p{
+	height: 30px;
+	font-size: 20px;
+	line-height: 40px;
+	padding-left: 50px;
+}
+
+.contents-wrapper{
+	padding: 5% 0 0 0;
+	height: 35%;
+}

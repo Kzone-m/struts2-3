@@ -1,0 +1,15 @@
+/* ----------------- Footer Style -------------------*/
+hr{
+	height: 10px;
+	border: 0;
+	box-shadow: 0 10px 10px -10px #bbb inset;
+}
+
+footer {
+  background-color: #f7f7f7;
+  padding-top: 20px;
+}
+
+footer h2{
+  font-size: 18px;
+}
