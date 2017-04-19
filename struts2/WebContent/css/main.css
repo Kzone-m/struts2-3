@@ -50,6 +50,20 @@ a {
 	font-weight: bold;
 }
 
+.form-radio-wrapper{
+	color: #4CE551;
+	font-weight: bold;
+	width: 60%;
+	margin: 10px auto;
+}
+
+.form-radio-inside-wrapper{
+	width: 30%;
+	margin-left: 3%;
+	float: left;
+}
+
+
 .form-submit{
   border-radius: 5px;
   background-color: #E54C4C;

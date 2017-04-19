@@ -23,7 +23,7 @@ public class SelectTweetDAO {
 	 * @param password パスワード
 	 * @return List<TweetDTO> つぶやき情報
 	 */
-	public List<TweetDTO> selectTopFiveTweets() throws SQLException{
+	public List<TweetDTO> selectTopNumberTweets(int num) throws SQLException{
 		DBConnector db = new DBConnector("com.mysql.jdbc.Driver","jdbc:mysql://localhost/","sym","root","KKznzn92");
 		Connection con = db.getConnection();
 		TweetDTO dto = null;
@@ -31,10 +31,12 @@ public class SelectTweetDAO {
 		PreparedStatement ps = null;
 		String sql = "select user_name, tweet, photo_url, icon_url from "
 				+ "(users inner join tweet using(user_id)) "
-				+ "inner join photo using(tweet_id) "
-				+ "order by tweet_date desc limit 5";		
+				+ "inner join photo using(tweet_id)"
+				+ "where open_range = 'public' "
+				+ "order by tweet_date desc limit ?";		
 		try{
 			ps = con.prepareStatement(sql);
+			ps.setInt(1, num);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()){
 				dto = new TweetDTO();

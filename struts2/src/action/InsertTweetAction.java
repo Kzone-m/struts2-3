@@ -52,6 +52,10 @@ public class InsertTweetAction extends ActionSupport implements SessionAware {
      * ユーザーのつぶやき
      */
     private String tweet;
+    /**
+     * ツイートの公開範囲
+     */
+    private String openRange;
 	
     
 	/**
@@ -69,7 +73,7 @@ public class InsertTweetAction extends ActionSupport implements SessionAware {
 		}
 		
 		InsertTweetDAO dao = new InsertTweetDAO();
-		if(dao.insertTweet(userId, tweet)){
+		if(dao.insertTweet(userId, tweet, openRange)){
 			// ツイートIDの取得
 			tweetId = dao.selectTweetId(userId);
 			if(tweetId != 0){
@@ -137,6 +141,21 @@ public class InsertTweetAction extends ActionSupport implements SessionAware {
 	 */
 	public void setTweet(String tweet) {
 		this.tweet = tweet;
+	}
+
+	/**
+	 * ツイートの公開範囲を取得します。
+	 * @return openRange ツイートの公開範囲
+	 */
+	public String getOpenRange() {
+		return openRange;
+	}
+	/**
+	 * ツイートの公開範囲を設定します。
+	 * @param openRange 
+	 */
+	public void setOpenRange(String openRange) {
+		this.openRange = openRange;
 	}
 
 	/**

@@ -23,7 +23,7 @@ import dao.ChangeIconDAO;
  */
 public class ChangeIconAction extends ActionSupport implements SessionAware{
 	/**
-	 * 写真を保存するディレクトリー
+	 * 写真を保存するディレクトリーへの絶対パス
 	 */
 	private final String filePath = "/Users/Kazune/Documents/workspace/struts2/WebContent/img/user_icons/user";
 	/**
@@ -52,31 +52,37 @@ public class ChangeIconAction extends ActionSupport implements SessionAware{
 	private boolean iconFlg;
 	
 	public String execute() throws SQLException{
+		// 戻り値を最初はSUCCESSに設定する -> エラーがでた場合は戻り値をERRORに設定する
 		String result = SUCCESS;
 		
+		// ログインユーザーのIDを取得する -> 取得できない場合(userId = 0)は強制ログアウトをする
 		int userId = 0;
 		if(session.containsKey("userId")){
 			userId = (int) session.get("userId");
 		}
-		String FileDir = filePath + String.valueOf(userId) + ".png";
-		String iconUrl = "img/user_icons/user" + String.valueOf(userId) + ".png";
-		BufferedImage bImage = null;
-		
-		ChangeIconDAO dao = new ChangeIconDAO();
-		boolean updateIcon = dao.updateIconURL(userId, iconUrl, iconFlg);
-		
-		
-		System.out.println("iconFlg: " + iconFlg);
-		System.out.println("updateIcon: " + updateIcon);
-		
-		if(iconFlg){
-			if(updateIcon){
-				File file = new File(FileDir);
-				System.out.println("file.exists()" + file.exists());
-				if(file.exists()) System.out.println("file.delete()" + file.delete());
-			}
+		if(userId == 0){
+			return "logout";
 		}
 		
+		// ログインユーザーの写真が保存されていディレクトリーの絶対パスを取得する
+		String FileDir = filePath + String.valueOf(userId) + ".png";
+		// ログインユーザーの写真をJSP側で取得するためのパスを生成する
+		String iconUrl = "img/user_icons/user" + String.valueOf(userId) + ".png";
+		// アップロードされた画像データを保存するためのバッファを作成する
+		BufferedImage bImage = null;
+		
+		// DAOを作成し、まずDBに保存されているログインユーザーの写真をJSP側で取得するためのパスを書き換える -> 成功ならTrue, 失敗ならFalse
+		ChangeIconDAO dao = new ChangeIconDAO();
+		boolean updateIconFlg = dao.updateIconURL(userId, iconUrl, iconFlg);
+		
+		// ユーザーが過去にアイコン画像を設定していた、かつ、新しい写真のパスをDBに保存することに成功していたなら
+		if(iconFlg && updateIconFlg){
+			// ユーザーが前回使っていた写真のファイルを取得し、削除する
+			File file = new File(FileDir);
+			if(file.exists()) file.delete();
+		}
+		
+		// アップロードされた画像データをbImageに書き写し、ログインユーザーのアイコン用のファイルを作成し、その値をそのファイルに保存する
 		try{
 			bImage = ImageIO.read(userImage);
     		if(!ImageIO.write(bImage, "png", new File(FileDir))){
@@ -86,7 +92,7 @@ public class ChangeIconAction extends ActionSupport implements SessionAware{
 			System.out.println("IOException occured :" + e.getMessage());
 		}
 		
-		// もし、ツイートと画像ファイルの保存に成功したら、フォルダに写真を反映させるために6秒間待つメソッドを実行
+		// もし、ツイートと画像ファイルの保存に成功したら、プロジェクトフォルダに写真を反映させるために6秒間待つメソッドを実行
 		if(result.equals(SUCCESS)){
 			try {
 			    Thread.sleep(6000);
@@ -94,7 +100,6 @@ public class ChangeIconAction extends ActionSupport implements SessionAware{
 				System.out.println("InterruptedException occured :" + e.getMessage());
 			}
 		}
-		
 		return result;
 	}
 	

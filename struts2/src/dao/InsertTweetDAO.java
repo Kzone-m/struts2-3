@@ -21,11 +21,11 @@ public class InsertTweetDAO {
 	 * @return insertFlg 更新できたかどうかの真偽値
 	 * @throws SQLException
 	 */
-	public boolean insertTweet(int userId, String tweet)throws SQLException{
+	public boolean insertTweet(int userId, String tweet, String openRange)throws SQLException{
 		DBConnector db = new DBConnector("com.mysql.jdbc.Driver","jdbc:mysql://localhost/","sym","root","KKznzn92");
 		Connection con = db.getConnection();
 		PreparedStatement ps = null;
-		String sql = "insert into tweet (user_id, tweet) values(?, ?)";
+		String sql = "insert into tweet (user_id, tweet, open_range) values(?, ?, ?)";
 		int rs = 0;
 		boolean insertFlg = false;
 		
@@ -33,6 +33,7 @@ public class InsertTweetDAO {
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, userId);
 			ps.setString(2, tweet);
+			ps.setString(3, openRange);
 			con.setAutoCommit(false);
 			rs = ps.executeUpdate();
 		}

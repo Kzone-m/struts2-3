@@ -35,6 +35,9 @@
 				</form>
 			</s:iterator>
 		</s:iterator>
+		<form action="DeleteIconAction">
+			<input type="submit" value="アイコン画像を外す" class="form-submit">
+		</form>
 	</div>
 	<s:include value="footer.jsp"/>
 </div>

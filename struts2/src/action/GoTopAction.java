@@ -9,12 +9,12 @@ import dto.TweetDTO;
 import dao.SelectTweetDAO;
 
 /**
- * ユーザーが投稿した画像ファイルとつぶやきを取得するためのアクション
+ * 投稿されている最新のつぶやきを4件取得するためのアクション
  * @author KAZUNE MIYAGI
  * @since 2017/04/17
  * @version 1.1
  */
-public class SelectTweetAction extends ActionSupport implements SessionAware {
+public class GoTopAction extends ActionSupport implements SessionAware {
 	
 	/**
 	 * シリアルID
@@ -27,11 +27,7 @@ public class SelectTweetAction extends ActionSupport implements SessionAware {
 	/**
 	 * 最新のツイートを５件
 	 */
-	private List<TweetDTO> topFiveTweets;
-	/**
-	 * ログインユーザーのツイート
-	 */
-	private List<TweetDTO> loginUserTweets;
+	private List<TweetDTO> topFourTweets;
 
 	
 	/**
@@ -40,20 +36,13 @@ public class SelectTweetAction extends ActionSupport implements SessionAware {
 	 * @return return SUCCESS
 	 * @throws SQLException エラー処理
 	 */
-	public String execute() throws SQLException{
-		int userId = 0;
-		if(session.containsKey("userId")){
-			userId = (int) session.get("userId");
-		}		
+	public String execute() throws SQLException{	
 		SelectTweetDAO dao = new SelectTweetDAO();
 		List<TweetDTO> dto = new ArrayList<TweetDTO>();
-		dto = dao.selectTopNumberTweets(5);
-		setTopFiveTweets(dto);
-		dto = dao.selectUserTweets(userId);
-		setLoginUserTweets(dto);
+		dto = dao.selectTopNumberTweets(4);
+		setTopFourTweets(dto);
 		return SUCCESS;
 	}
-	
 	
 	/**
 	 * セッションを取得します。
@@ -74,30 +63,15 @@ public class SelectTweetAction extends ActionSupport implements SessionAware {
 	 * 最新のツイートを５件を取得します。
 	 * @return topFiveTweets 最新のツイートを５件
 	 */
-	public List<TweetDTO> getTopFiveTweets() {
-		return topFiveTweets;
+	public List<TweetDTO> getTopFourTweets() {
+		return topFourTweets;
 	}
 	/**
 	 * 最新のツイートを５件を設定します。
 	 * @param topFiveTweets 最新のツイートを５件
 	 */
-	public void setTopFiveTweets(List<TweetDTO> topFiveTweets) {
-		this.topFiveTweets = topFiveTweets;
-	}
-
-	/**
-	 * ログインユーザーのツイートを取得します。
-	 * @return loginUserTweets ログインユーザーのツイート
-	 */
-	public List<TweetDTO> getLoginUserTweets() {
-		return loginUserTweets;
-	}
-	/**
-	 * ログインユーザーのツイートを設定します。
-	 * @param loginUserTweets ログインユーザーのツイート
-	 */
-	public void setLoginUserTweets(List<TweetDTO> loginUserTweets) {
-		this.loginUserTweets = loginUserTweets;
+	public void setTopFourTweets(List<TweetDTO> topFourTweets) {
+		this.topFourTweets = topFourTweets;
 	}
 		
 }

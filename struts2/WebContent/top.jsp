@@ -87,70 +87,33 @@
       </div>
   </div>
 
-
-
-
-
 <!-- Contents Page Start!!!-->
 <div class="container">
 	<div class="tweet-header">
 		<h3>最新のツイート</h3>
 	</div>
-	<div class="tweet-wrapper">
-		<div class="image-wrapper">
-			<img src="Desktop4-2.png" alt="title">
-		</div>
-		<div class="account-wrapper">
-			<img src="Desktop4-2.png" alt="title" >
-			<p>User Name</p>
-		</div>
-		<div class="contents-wrapper">
-			<p>This is a sample sentece</p>
-		</div>
-	</div>
-
-	<div class="tweet-wrapper">
-		<div class="image-wrapper">
-			<img src="Desktop4-2.png" alt="title">
-		</div>
-		<div class="account-wrapper">
-			<img src="Desktop4-2.png" alt="title">
-			<p>User Name</p>
-		</div>
-		<div class="contents-wrapper">
-			<p>This is a sample sentece</p>
-		</div>
-	</div>
-
-	<div class="tweet-wrapper">
-		<div class="image-wrapper">
-			<img src="Desktop4-2.png" alt="title">
-		</div>
-		<div class="account-wrapper">
-			<img src="Desktop4-2.png" alt="title">
-			<p>User Name</p>
-		</div>
-		<div class="contents-wrapper">
-			<p>This is a sample sentece</p>
-		</div>
-	</div>
-	
-	<div class="tweet-wrapper">
-		<div class="image-wrapper">
-			<img src="Desktop4-2.png">
-		</div>
-		<div class="account-wrapper">
-			<img src="Desktop4-2.png" >
-			<p>User Name</p>
-		</div>
-		<div class="contents-wrapper">
-			<p>This is a sample sentece This is a sample sentece This is a sample sentece This is a sample sentece</p>
-		</div>
-	</div>
+	<s:iterator value="topFourTweets">
+		<s:iterator>
+			<div class="tweet-wrapper">
+				<div class="image-wrapper">
+					<img src="<s:property value="photoUrl"/>">
+				</div>
+				<div class="account-wrapper">
+					<img src="<s:property value="iconUrl"/>" alt="title" >
+					<p><s:property value="userName"/></p>
+				</div>
+				<div class="contents-wrapper">
+					<p><s:property value="tweet"/></p>
+				</div>
+			</div>	
+		</s:iterator>
+	</s:iterator>
 </div>
 <!-- Contents Page End!!!-->
 
+
 <s:include value="footer.jsp" />
 
+<script src="js/top.js"></script>
 </body>
 </html>

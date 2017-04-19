@@ -52,11 +52,27 @@
 				</div>
 				<form action="InsertTweetAction" method="post" enctype="multipart/form-data">
 		            <div class="form-group">
-		              <textarea name="tweet" id="comment" cols="50" rows="10" class="form-control" placeholder="Share your memory">
-		              </textarea>
-		              <input type="file" name="userImage" class="form-control form-file">
-		              <input type="submit" value="送信" class="form-control form-submit"/>
-		              <p class="counter"><span id="label">200</span> characters left</p>
+		                <textarea name="tweet" id="comment" cols="50" rows="10" class="form-control" placeholder="Share your memory">
+		                </textarea>
+		                <input type="file" name="userImage" class="form-control form-file">
+		              
+		                <div class="form-radio-wrapper">
+		                	<div class="form-radio-inside-wrapper">
+			                	<input type="radio" name="openRange" value="public" checked="checked">
+			                	<label>Public</label>
+			                </div>
+			                <div class="form-radio-inside-wrapper">
+			               		<input type="radio" name="openRange" value="protected">
+			                	<label>Protected</label>
+			                </div>
+			                <div class="form-radio-inside-wrapper">
+			                	<input type="radio" name="openRange" value="private">
+			                	<label>Private</label>
+			                </div>
+		                </div>
+		              
+		                <input type="submit" value="送信" class="form-control form-submit"/>
+		                <p class="counter"><span id="label">200</span> characters left</p>
 		            </div>
 	            </form>
             </div>

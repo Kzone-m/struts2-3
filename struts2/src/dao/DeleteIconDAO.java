@@ -8,29 +8,26 @@ import java.sql.SQLException;
 import util.DBConnector;
 
 /**
- * Icon写真を保存もしくは上書きするクラス
+ * Icon写真を削除するクラス
  * @author KAZUNE MIYAGI
  * @since 2017/04/17
  * @version 1.1
  */
 
-public class ChangeIconDAO {
+public class DeleteIconDAO {
 	/**
-	 * Icon写真を保存もしくは上書きするメソッド
+	 * Icon写真を削除するメソッド
 	 * @param userId 顧客ID
 	 * @return insertFlg 更新できたかどうかの真偽値
 	 * @throws SQLException
 	 */
-	public boolean updateIconURL(int userId, String iconUrl, boolean iconFlg)throws SQLException{
+	public boolean deleteIconURL(int userId)throws SQLException{
 		DBConnector db = new DBConnector("com.mysql.jdbc.Driver","jdbc:mysql://localhost/","sym","root","KKznzn92");
 		Connection con = db.getConnection();
 		PreparedStatement ps = null;
 		String sql = null;
-		if(iconFlg){
-			sql = "update users set icon_url = ? where user_id = ?";
-		}else{
-			sql = "update users set icon_url = ?, icon_flg = true where user_id = ?";
-		}
+		sql = "update users set icon_url = ?, icon_flg = false where user_id = ?";
+		String iconUrl = "img/user_icons/unset.png";
 		int rs = 0;
 		boolean updateFlg = false;
 		try{
@@ -40,9 +37,9 @@ public class ChangeIconDAO {
 			con.setAutoCommit(false);
 			rs = ps.executeUpdate();
 		}
-		catch(SQLException e1){
+		catch(SQLException e){
 			con.rollback();
-			e1.printStackTrace();
+			e.printStackTrace();
 		}
 		/*
 		finally{
